@@ -19,11 +19,44 @@
   Até aqui, o objeto "cat" possui as seguintes propriedades e valores: "name", que recebeu "X", "age", que recebeu "X", "color", que recebeu "X", "bestFriends", que recebeu um array com os itens "X" e "X", e "sound", que recebeu uma função que retorna "X".
 */
 
+function formatting(array) {
+  const lastItem = array[array.length - 1];
+  formattedElement = array
+    .join(", ")
+    .replace(`, ${lastItem}`, ` e ${lastItem}`);
+  return formattedElement;
+}
+
+let cat = {
+  name: "Farofa",
+  age: 100,
+  color: "Cinza",
+  bestFriends: ["Panqueca", "Pescador", "Azul"],
+  sound: function () {
+    console.log("Miau")
+  }
+};
+
+console.log(cat);
+
+console.log(
+  `Até aqui, o objeto "cat" possui as seguintes propriedades e valores: "name", que recebeu ${
+    cat["name"]
+  }, "age", que recebeu ${cat["age"]}, "color", que recebeu ${
+    cat["color"]
+  }, "bestFriends", que recebeu um array com os itens ${formatting(
+    cat["bestFriends"]
+  )}, e "sound", que recebeu uma função que retorna ${cat["sound"]}.`
+);
+
 /*
   03
 
   - Adicione 2 anos à idade do gato e exiba a idade atualizada no console.
 */
+
+cat["age"] += 2;
+console.log(cat["age"]);
 
 /*
   04
@@ -32,6 +65,14 @@
   - Exiba o array de amigos no console para verificar se o novo amigo(a) foi  
     adicionado.
 */
+
+// function addFriend(newFriend, array){
+//   array.push(newFriend)
+// }
+
+// addFriend('Floquinho', cat['bestFriends'])
+
+// console.log(cat['bestFriends'])
 
 /*
   05
@@ -42,6 +83,14 @@
     colchetes.
 */
 
+function addColor(newColor, object) {
+  object["color"] += newColor;
+}
+
+addColor(" Amarelo Rajado", cat);
+
+console.log(cat);
+
 /*
   06
 
@@ -49,6 +98,12 @@
     parâmetro é um objeto;
   - Utilize a função para exibir no console se "cat" é um objeto.
 */
+
+const isAObject = (element) => {
+  return typeof element === "object";
+};
+
+console.log(isAObject(cat));
 
 /*
   07
@@ -60,6 +115,16 @@
   "A soma das idades de NOME_DO_GATO e NOME_DO_CACHORRO é RESULTADO_DA_SOMA."
 */
 
+let dog = {
+  name: "Panqueca",
+  age: 200,
+  color: "Black",
+  bestFriends: ["Floquinho", "Paqueca", "Farofa"],
+  sound: function (){
+    console.log("Auauau")
+  } 
+};
+
 /*
   08
 
@@ -68,16 +133,14 @@
   - Como você refatoraria esta função?
 */
 
-const isAnSUV = car => {
-  if (car === 'Honda HR-V' || car === 'Jeep Renegade' || car === 'Ford EcoSport' || car === 'Hyundai iX35') {
-    return true
-  }
+const cars = ["Honda HR-V", "Jeep Renegade", "Ford EcoSport", "Hyundai iX35"];
 
-  return false
-}
+const isAnSUV = (car) => {
+  return cars.includes(car);
+};
 
-// console.log(isAnSUV('Honda Civic'))
-// console.log(isAnSUV('Ford EcoSport'))
+console.log(isAnSUV("Honda Civic"));
+console.log(isAnSUV("Ford EcoSport"));
 
 /*
   09
@@ -91,3 +154,14 @@ const isAnSUV = car => {
     propriedades, retorne a mensagem que a propriedade armazena;
   - Teste a função, exibindo no console a mensagem de cada propriedade.
 */
+
+const getTypeDefinition = (type) => {
+  object = {
+    null: "seta, explicitamente, uma variável sem valor.",
+    undefined: "Representa um valor não-setado.",
+    object: "Arrays, Datas, Objetos literais, Funções, etc.",
+  };
+  return object[type] || 'Tipo inválido'
+};
+
+console.log(getTypeDefinition('null'))

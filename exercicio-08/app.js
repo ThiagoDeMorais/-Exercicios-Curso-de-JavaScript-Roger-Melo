@@ -7,6 +7,12 @@
   - Exiba o resultado no console, sem inserir um console.log() dentro da função.
 */
 
+function multiplies(number1 = 0, number2 = 0){
+  return number1 * number2
+}
+
+console.log(multiplies(9,7))
+
 /*
   02
 
@@ -14,6 +20,13 @@
     **function expression** que retorne o resultado da **divisão** entre esses  
     2 números.
 */
+
+const divide = (number1 = 1, number2 = 1) => {
+  return number1 / number2; 
+}
+
+console.log(divide(14,7))
+
 
 /*
   03
@@ -28,6 +41,12 @@
   "Esta é a Xª vez que essa string é exibida."
 */
 
+// const showValue = value => console.log(value)
+
+// for(let i = 0; i < 7; i++){
+//   showValue(`Esta é a ${i + 1}ª vez que essa string é exibida.`)
+// }
+
 /*
   04
 
@@ -41,6 +60,16 @@
 
 const millennialWords = ['lol', 'yolo', 'troll', 'stalkear', 'selfie', 'influencer', 'crush', 'fitness', 'hater', 'bae', 'random', 'kawaii', 'outfit', 'mood', 'fail']
 
+const toUpperCase = array => {
+  newArray = []
+  array.forEach(element => {
+    newArray.push( element.toUpperCase())
+  });
+  return newArray
+}
+
+console.log(toUpperCase(millennialWords))
+
 /*
   05
 
@@ -53,6 +82,24 @@ const millennialWords = ['lol', 'yolo', 'troll', 'stalkear', 'selfie', 'influenc
 */
 
 const randomNumbers = [-2, 93, 34, -1, 1, 93, 11, -7, 47, -3]
+let amountOfPositiveNumbers = 0
+const amountOfNumbers = randomNumbers.length
+
+function isPositive(number = 0){
+  return number > 0
+}
+
+randomNumbers.forEach(element => {
+  if(isPositive(element)){
+    amountOfPositiveNumbers++
+  }
+})
+
+const amountOfNegativeNumbers = amountOfNumbers - amountOfPositiveNumbers
+
+
+console.log(`O array "randomNumbers" possui ${amountOfNumbers} números, sendo ${amountOfPositiveNumbers} positivos e ${amountOfNegativeNumbers} negativos.`)
+
 
 /*
   06
@@ -64,8 +111,21 @@ const randomNumbers = [-2, 93, 34, -1, 1, 93, 11, -7, 47, -3]
     função.
 */
 
-// getOddNumbers([83, 52, 31, 73, 98, 37, 61, 56, 12, 24, 35, 3, 34, 80, 42])
+const getOddNumbers = array => {
+  let oddNumbers = []
 
+  array.forEach(element => {
+    const isOdd = element % 2 !== 0
+    if(isOdd){
+      oddNumbers.push(element)
+    }
+  })
+  
+  return oddNumbers
+}
+
+const result = getOddNumbers([83, 52, 31, 73, 98, 37, 61, 56, 12, 24, 35, 3, 34, 80, 42])
+console.log(result)
 /*
   07
 
@@ -102,3 +162,11 @@ const functions = [
   function () { return 'Índias' },
   function () { return 'Ocidentais.' }
 ]
+
+let phrase = ''
+
+functions.forEach(element => {
+  phrase += ` ${element()}`
+})
+
+console.log(phrase)

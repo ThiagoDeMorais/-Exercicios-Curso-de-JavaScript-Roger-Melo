@@ -1,3 +1,9 @@
+function formatting(array){
+  const lastItem = array[array.length -1]
+  formattedElement = array.join(', ').replace(`, ${lastItem}`,` e ${lastItem}`)
+  return formattedElement;
+}
+
 /*
   01
 
@@ -5,7 +11,7 @@
   - O resultado exibido no console deve ser: false true.
 */
 
-console.log(true, false)
+console.log(!true, !false)
 
 /*
   02
@@ -18,6 +24,11 @@ console.log(true, false)
 
 const animals = ['macaco', 'tucano', 'elefante', 'pavão', 'hipopótamo']
 
+if(!animals.includes('leão')){
+  console.log('Leão não existe no array animals.')
+}else{
+  console.log('Leão existe no array animals.')
+}
 /*
   03
 
@@ -29,8 +40,18 @@ const animals = ['macaco', 'tucano', 'elefante', 'pavão', 'hipopótamo']
   "A soma ultrapassou 400. Até aqui, o valor atual é RESULTADO_DA_SOMA."
 */
 
-const randomNumbers = [59, 61, 73, 57, 35, 73, 21, 87, 43]
+// const randomNumbers = [59, 61, 73, 57, 35, 73, 21, 87, 43]
+// let sum = 0
 
+// for(let i = 0; i< randomNumbers.length; i++){
+//   sum += randomNumbers[i]
+
+//   if(sum > 400){
+//     break;
+//   }
+// }
+
+// console.log(`A soma ultrapassou 400. Até aqui, o valor atual é ${sum}.`)
 /*
   04
 
@@ -41,6 +62,18 @@ const randomNumbers = [59, 61, 73, 57, 35, 73, 21, 87, 43]
 */
 
 const sentence = ['A', 'certeza', 'dúvida', 'é', 'o', 'princípio', 'da', 'sabedoria.']
+
+let message = ''
+
+for(let i = 0; i< sentence.length; i++){
+  const word = sentence[i]
+  if(word === 'certeza'){
+    continue
+  }
+  message += ` ${word}`
+}
+
+console.log(message)
 
 /*
   05
@@ -59,6 +92,37 @@ const sentence = ['A', 'certeza', 'dúvida', 'é', 'o', 'princípio', 'da', 'sab
 
 const randomValues = [57, false, 'JS', [], true, 'HTML', 31, null, false, 'CSS', 97, true, 'Git', 11, 'sticker', false, 'GitHub', true, null]
 
+let numberOfIteratedStrings = 0;
+let numberOfIteratedBooleans = 0;
+let iterations = 1;
+let arrayOfStrings = []
+
+for(iterations = 0; iterations < randomValues.length; iterations++){
+  const isString = typeof randomValues[iterations] === 'string'
+  const isBoolean = typeof randomValues[iterations] === 'boolean'
+
+  console.log(randomValues[iterations]);
+  if(!isString){
+    if(isBoolean){
+      numberOfIteratedBooleans++
+    }
+    continue
+  }
+  
+  arrayOfStrings.push(randomValues[iterations])
+  numberOfIteratedStrings++
+
+  if(numberOfIteratedStrings === 4){
+    break
+  }
+}
+
+const text = `    3 informações sobre o array randomValues:
+- As primeiras 4 strings são ${formatting(arrayOfStrings)};
+- Até que as primeiras 4 strings fossem iteradas, ${numberOfIteratedBooleans} booleans foram iterados;
+- O array foi iterado por ${iterations} vezes.`
+
+console.log(text)
 /*
   06
 

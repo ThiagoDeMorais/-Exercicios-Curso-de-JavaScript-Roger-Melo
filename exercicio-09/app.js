@@ -13,9 +13,12 @@
     valor no console.
 */
 
-function convertToString (value) {
-  return String(value)
-}
+const convertToString = value => String(value)
+
+console.log(convertToString(7))
+// function convertToString (value) {
+//   return String(value)
+// }
 
 /*
   02
@@ -23,6 +26,13 @@ function convertToString (value) {
   - Crie uma função que retorne a quantidade de caracteres que uma string  
     recebida por parâmetro possui.
 */
+
+// function returnsNumberOfCharacters(string){
+//   return string.length
+// }
+
+// console.log(returnsNumberOfCharacters('coisa'))
+
 
 /*
   03
@@ -34,12 +44,24 @@ function convertToString (value) {
   "CHOCOTONE E OVO DE PÁSCOA JUNTOS NO MERCADO EM PLENO FEVEREIRO"
 */
 
+function toLowerCase(string){
+  return string.toLowerCase()
+}
+
+console.log(toLowerCase('CHOCOTONE E OVO DE PÁSCOA JUNTOS NO MERCADO EM PLENO FEVEREIRO'))
+
 /*
   04
 
   - Crie uma função que recebe 2 parâmetros: um caractere e uma string;
   - Ao ser invocada, a função deve retornar o index do caractere na string.
 */
+
+const indexOfCharacter = (character, string) => {
+  return string.indexOf(character)
+}
+
+console.log(indexOfCharacter('a', 'casa'))
 
 /*
   05
@@ -48,12 +70,28 @@ function convertToString (value) {
     passado por argumento existe no array (também passado por argumento).
 */
 
+const array = [1, 5, 3, 7, 9, 17]
+const newArray = [0, 5, 3, 7, 9, 17]
+
+const itsIncluded = (item, array) => {
+  return array.includes(item)
+}
+
+console.log(itsIncluded(17,array))
+
 /*
   06
 
   - Crie uma função que retorna a concatenação de 2 arrays, passados como  
     argumentos em sua invocação;
 */
+
+const concatenateArrays = (array1, array2) => {
+  return array1.concat(array2)
+}
+
+console.log(concatenateArrays(array, newArray))
+
 
 /*
   07
@@ -62,12 +100,24 @@ function convertToString (value) {
     mas com o último item removido.
 */
 
+const removeLastItem = array => {
+  array.pop()
+  return array
+}
+
+console.log(removeLastItem(array))
 /*
   08
 
   - Crie uma função que retorna se o valor passado como argumento em sua  
     invocação é null.
 */
+
+const variable = null
+
+const isNull = value => value === null
+
+console.log(isNull(variable))
 
 /*
   09
@@ -80,6 +130,9 @@ function convertToString (value) {
     foi exibido.
 */
 
+
+
+
 /*
   10
 
@@ -91,6 +144,13 @@ function convertToString (value) {
     resulte no triplo de 33.
 */
 
+const executeCallback = (value, callback) => {
+  return callback(value)
+}
+
+const triplies = number => number * 3
+
+console.log(executeCallback(11,triplies))
 /*
   11
 
@@ -102,6 +162,10 @@ function convertToString (value) {
 
 const numbers = [1, 2, 3]
 
+numbers.forEach((element, index, array) => {
+  console.log(`O ${index + 1}º item do array ${array} é ${element}.`)
+})
+
 /*
   12
 
@@ -110,12 +174,18 @@ const numbers = [1, 2, 3]
     criada.
 */
 
+
+
 const letters = ['v', 'e', 'p']
 let lettersCopy = []
 
-for (let i = 0; i < letters.length; i++) {
-  lettersCopy.push(letters[i])
-}
+letters.forEach(element => {
+  lettersCopy.push(element)
+})
+
+console.log(lettersCopy)
+
+
 
 /*
   13
@@ -145,8 +215,13 @@ const review = [
 ]
 
 let paragraphs = ''
+review.forEach(element => {
+  paragraphs += `<p>${element}</p>`
+})
 
 section.innerHTML = paragraphs
+
+
 
 /*
   14
@@ -168,3 +243,31 @@ section.innerHTML = paragraphs
     pelo restante da quantidade de pessoas que curtiram o post (além das duas  
     pessoas já mencionadas no início da mensagem).
 */
+
+function formatting(array){
+  const lastItem = array[array.length -1]
+  formattedElement = array.join(', ').replace(`, ${lastItem}`,` e ${lastItem}`)
+  return formattedElement;
+}
+
+const likes = ['Johnny', 'Jhonn', 'Peter', 'Jeshy']
+
+function getLikes(arrayOfPeopleWhoLiked){
+  const peopleWhoLiked = arrayOfPeopleWhoLiked.length
+  if(peopleWhoLiked === 0){
+    return 'Ninguém curtiu isso'
+  }else if(peopleWhoLiked === 1){
+    return ``
+  }else if(peopleWhoLiked === 2){
+    return `${formatting(arrayOfPeopleWhoLiked)} curtiram isso`
+  }
+  else if(peopleWhoLiked === 3){
+    return `${formatting(arrayOfPeopleWhoLiked)} curtiram isso`
+  }
+  else if(peopleWhoLiked > 3){
+    return `${arrayOfPeopleWhoLiked[1]} e ${peopleWhoLiked} curtiram isso`
+  }
+
+}
+
+console.log(getLikes(likes))
