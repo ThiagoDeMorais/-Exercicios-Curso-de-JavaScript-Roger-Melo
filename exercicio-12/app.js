@@ -27,6 +27,14 @@ const best2019Movies = [
   { title: 'A Vida Invisível', directedBy: 'Karim Aïnouz' }
 ]
 
+let message = `Segundo o site Omelete, os melhores filmes de 2019 são:`
+
+
+best2019Movies.forEach(movie => {
+  message += `\n  - ${movie.title}, dirigido por ${movie.directedBy}`
+})
+
+console.log(message)
 /*
   02
 
@@ -59,15 +67,24 @@ const youtubeUser = {
       gitHub: 'https://github.com/Roger-Melo'
     },
     country: 'Brasil'
+  },
+  showMessage () {
+    let message = `Vídeos recentes de ${this.name}:`
+    this.videos.recentVideos.forEach(videos =>{
+      message += `\n ${videos.title}`
+    })
+    console.log(message);
   }
 }
 
+youtubeUser.showMessage()
 /*
   03
 
   - Exiba o valor do PI no console.
 */
 
+console.log(Math.PI)
 
 
 /*
@@ -78,7 +95,8 @@ const youtubeUser = {
 */
 
 const firstNumber = 8.3
-
+const firstNumberFlooer =  Math.floor(firstNumber)
+console.log(firstNumberFlooer)
 /*
   05
 
@@ -87,7 +105,8 @@ const firstNumber = 8.3
 */
 
 const secondNumber = 3.5
-
+const secondNumberRound = Math.round(secondNumber)
+console.log(secondNumberRound)
 /*
   06
 
@@ -96,6 +115,8 @@ const secondNumber = 3.5
 */
 
 const thirdNumber = 8.9
+const thirdNumberRound = Math.round(thirdNumber)
+console.log(thirdNumberRound)
 
 /*
   07
@@ -104,6 +125,8 @@ const thirdNumber = 8.9
 */
 
 const fourthNumber = 5.5
+const fourthNumberTrunc = Math.trunc(fourthNumber)
+console.log(fourthNumberTrunc)
 
 /*
   08
@@ -111,3 +134,7 @@ const fourthNumber = 5.5
   - A cada vez que o index.html for carregado, exiba no console um número  
     aleatório de 0 à 10, incluindo 0 e 10.
 */
+
+
+const randomNumber = Math.round(Math.random() * 10)
+console.log(randomNumber)
