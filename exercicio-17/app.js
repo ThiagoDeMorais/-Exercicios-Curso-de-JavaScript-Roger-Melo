@@ -4,12 +4,20 @@
   - No envio do form, faça com que a página não seja recarregada.
 */
 
+
 /*
   02
 
   - No envio do form obtenha, através do objeto event, o texto inserido no  
     input e exiba-o no console.
 */
+
+const form = document.querySelector('form')
+
+// form.addEventListener('submit', event =>{
+//   event.preventDefault()
+//   console.log(event.target.input.value)
+// })
 
 /*
   03
@@ -18,6 +26,13 @@
     index.html;
   - Exiba no console o boolean no qual este teste resulta.
 */
+
+const link = document.querySelector('a')
+
+// const regex = /documentation/
+// const linkText = link.textContent
+
+// console.log(regex.test(linkText))
 
 /*
   04
@@ -28,6 +43,10 @@
 */
 
 const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 na flauta'
+const regex = /[A-Z0-9]{3}/
+console.log(regex.test(B99message))
+
+
 
 /*
   05
@@ -36,7 +55,7 @@ const B99message = 'E o Terry Crews faz tudo, inclusive tocar a abertura de B99 
     resultado do teste entre a regex e a string exibido no console seja true.
 */
 
-const word = 'O que a NASA fotografou no dia do seu aniversário?'
+const word = 'NASA'
 const NASARegex = /^[A-Z]{4}$/
 const NASAResult = NASARegex.test(word)
 
@@ -55,6 +74,21 @@ console.log(NASAResult)
     - "jozeti" não é um valor válido, pois contém 6 caracteres.
 */
 
+// const checksRegex =  event =>{
+//   event.preventDefault()
+//   const inputValue  = event.target.input.value
+//   const newRegex = /.{7,}/
+//   const isMatch = newRegex.test(inputValue)
+
+//   if(isMatch){
+//     console.log(`${inputValue} é um valor válido, pois contém ${inputValue.length} caracteres`)
+//   }else{
+//     console.log(`${inputValue}  não é um valor válido, pois contém ${inputValue.length} caracteres`)
+//   }
+// }
+
+// form.addEventListener('submit', checksRegex)
+
 /*
   07
 
@@ -66,3 +100,27 @@ console.log(NASAResult)
     - "0xY79aYx54e" é um valor válido, pois contém 11 letras e números;
     - "eich_1961" não é um valor válido, pois contém um caractere especial.
 */
+
+const clearInput = () => {
+  input.value = ''
+  input.focus()
+}
+
+const logMessage = message => {
+  console.log(message)
+  clearInput()
+}
+
+const handleSubmit =  event =>{
+  event.preventDefault()
+  const input  = event.target.input
+  const newRegex = /^[a-zA-Z0-9]{7,11}$/
+  const isMatch = newRegex.test(input.value)
+  if(isMatch){
+    logMessage(`${input.value} é um valor válido`)
+    return
+  }
+    logMessage(`${input.value}  não é um valor válido`) 
+}
+
+form.addEventListener('submit', handleSubmit)

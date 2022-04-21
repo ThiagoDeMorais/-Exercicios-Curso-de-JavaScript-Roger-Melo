@@ -21,6 +21,33 @@
   Dica: pesquise pelo método "insertAdjacentElement", no MDN;
 */
 
+const form = document.querySelector('form')
+const input = document.querySelector('#username')
+// const p = document.createElement('p')
+
+//  const handleNewParagraph = (message, newClass) => {
+//    p.textContent = message;
+//    p.setAttribute("class", newClass);
+//    input.insertAdjacentElement("afterend", p);
+//  };
+
+// form.addEventListener('keyup', () => {
+//   event.preventDefault()
+//   const regex = /^[a-zA-Z]{6,}$/
+//   const isMatch = regex.test(input.value)
+
+//   if(!isMatch){
+//    const message = "O valor deve conter no mínimo 6 caracteres, com apenas letras maiúsculas e/ou minúsculas"
+//    const newClass =  "username-help-feedback"
+//     handleNewParagraph(message, newClass)
+//     return
+//   }
+//   const message = "Username válido =)"
+//   const newClass =  "username-success-feedback"
+//   handleNewParagraph(message, newClass)
+
+// })
+
 /*
   02
 
@@ -32,6 +59,33 @@
   - Use as classes disponíveis no arquivo style.css para colorir o parágrafo;
   - Não insira o parágrafo manualmente no index.html.
 */
+
+const p = document.createElement('p')
+const button = document.querySelector('button')
+
+const handleNewParagraph = (message, newClass) => {
+  p.textContent = message;
+  p.setAttribute("class", newClass);
+  button.insertAdjacentElement("afterend", p);
+};
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const regex = /^[a-zA-Z]{6,}$/;
+  const inputValue = event.target.username.value;
+  const isMatch = regex.test(inputValue);
+
+  if (isMatch) {
+    const message = "Dados enviados =)";
+    const newClass = "submit-success-feedback";
+    handleNewParagraph(message, newClass);
+    return;
+  }
+  const message = "Por favor, insira um username válido";
+  const newClass = "submit-help-feedback";
+  handleNewParagraph(message, newClass);
+});
+
 
 /*
   03
@@ -50,3 +104,17 @@
         6;
     2) Pesquisar no MDN.
 */
+
+const otherSome = (array, func) => {
+  for(let i = 0; i < array.length; i++){
+    const item = array[i];
+    const expressionResult = func(item)
+    if(expressionResult){
+      return true
+    }
+  }
+
+  return false
+}
+
+console.log(otherSome([1, 2, 3], item => item > 9))

@@ -5,18 +5,21 @@
     'Clicou na div.' não seja exibida no console.
 */
 
-const div = document.querySelector('div')
-const elementsInsideDiv = Array.from(div.children)
+// const div = document.querySelector('div')
+// const elementsInsideDiv = Array.from(div.children)
 
-elementsInsideDiv.forEach(element => {
-  element.addEventListener('click', () => {
-    console.log('Clicou no filho da div.')
-  })
-})
+// elementsInsideDiv.forEach(element => {
+//   element.addEventListener('click', event => {
+//     const tagName = event.target.tagName.toLowerCase()
+//     console.log(`Clicou no ${tagName}, filho
+//     da div.`)
+//     event.stopPropagation()
+//   })
+// })
 
-div.addEventListener('click', () => {
-  console.log('Clicou na div.')
-})
+// div.addEventListener('click', () => {
+//   console.log('Clicou na div.')
+// })
 
 /*
   02
@@ -26,6 +29,9 @@ div.addEventListener('click', () => {
     da div.".
 */
 
+
+
+
 /*
   03
 
@@ -34,12 +40,39 @@ div.addEventListener('click', () => {
     filho da div, ao invés de ser exibida no console, seja inserida neste h2.
 */
 
+
+
+const h2 = document.querySelector('h2')
+
+
+const div = document.querySelector('div')
+
+div.addEventListener('click', event => {
+  const target = event.target
+  const tagName = target.tagName.toLowerCase()
+  const isSonOfDiv = target.parentElement === div
+  if(isSonOfDiv){
+    console.log(`Clicou no ${tagName}, filho
+    da div.`)
+    return
+  }
+  console.log(`Clicou na ${tagName}`)
+})
+
+
+
+
+
 /*
   04
 
   - Faça com que quando o texto do h2 for copiado, a mensagem "Texto copiado!"  
     seja exibida no console.
 */
+
+h2.addEventListener('copy', event => {
+  console.log('Texto copiado!')
+})
 
 /*
   05
@@ -49,12 +82,26 @@ div.addEventListener('click', () => {
     "Eixo X: COORDENADA_EIXO_X | Eixo Y: COORDENADA_EIXO_Y".
 */
 
+const egg = document.querySelector('.egg')
+egg.addEventListener('mousemove', ({offsetX, offsetY}) => {
+  egg.textContent = `Eixo X: ${offsetX} | Eixo Y: ${offsetY}`
+})
+
+
 /*
   06
 
   - Modifique a cor do ovo para "lightgoldenrodyellow" quando o botão for 
     clicado.
 */
+
+const button = document.querySelector('button')
+
+const changeEggColor = event => {
+  egg.style.backgroundColor = 'lightgoldenrodyellow'
+}
+
+button.addEventListener('click', changeEggColor)
 
 /*
   07
@@ -76,3 +123,10 @@ const people = [
   { id: 8, name: 'Matheus Manucci', profession: 'Piloto' },
   { id: 9, name: 'Hamilton Silva', profession: 'Advogado' }
 ]
+
+const item = 'Front-end developer'
+const containsItem =  people.some(({profession}) => profession === item)
+
+if(containsItem){
+  console.log('O array people contém, no mínimo, um(a) Front-end developer.')
+}

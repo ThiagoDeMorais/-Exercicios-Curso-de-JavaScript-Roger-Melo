@@ -6,7 +6,13 @@
   - Exiba no console os elementos filhos da ul com a classe já inserida.
 */
 
+const ul = document.querySelector('.videos')
 
+const lis = Array.from(ul.children)
+
+lis.forEach(li => {
+  li.classList.add('video')
+})
 
 /*
   02
@@ -15,6 +21,9 @@
     e exiba-o no console;
 */
 
+const h2 = document.querySelector('h2')
+
+console.log(h2.parentElement)
 
 
 /*
@@ -23,7 +32,9 @@
   - Descubra quem é o próximo elemento irmão do h1 e exiba-o no console;
 */
 
+const h1 = document.querySelector('h1')
 
+console.log(h1.nextElementSibling)
 
 /*
   04
@@ -31,6 +42,7 @@
   - Descubra quem é o irmão anterior da ul e exiba-o no console;
 */
 
+console.log(ul.previousElementSibling)
 
 
 /*
@@ -40,7 +52,10 @@
     exibida no console.
 */
 
-
+ul.addEventListener('click', event => {
+  const target = event.target
+  console.log(target.textContent)
+})
 
 /*
   06
@@ -60,9 +75,26 @@ const videos = [{
   length: '00:02:55'
 }]
 
+const button = document.querySelector('button')
+
+button.addEventListener('click', event => {
+  videos.forEach(video => {
+    const li = document.createElement('li')
+    li.textContent = video.name
+    ul.append(li)
+  })
+
+})
+
 /*
   07
 
   - Se um clique no h1 acontecer, faça com que todos os elementos dentro do body 
     sejam removidos.
 */
+
+
+h1.addEventListener('click', event =>{
+  const body = document.querySelector('body')
+  body.innerHTML = ''
+})
