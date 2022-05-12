@@ -6,6 +6,24 @@
   - Não utilize a date-fns.
 */
 
+const date = new Date("May 9 2022 18:05:32");
+console.log(date.getHours(), date.getMinutes(), date.getFullYear(), date.getDate(), date.getDay() )
+// const formatDate = (date) => {
+//   const day =
+//     String(date.getDay() + 1).length === 1
+//       ? `0${date.getDay() + 1}`
+//       : `${date.getDay() + 1}`;
+//   const month =
+//     String(date.getMonth()).length === 1
+//       ? `0${date.getMonth()}`
+//       : `${date.getMonth()}`;
+//   const year = date.getFullYear();
+
+//   return `${day}/${month}/${year}`;
+// };
+
+// console.log(formatDate(date));
+
 /*
   02
 
@@ -14,6 +32,49 @@
   - Não utilize a date-fns.
 */
 
+const months = [
+  "Janeiro",
+  "Fevereiro",
+  "Março",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro",
+];
+
+const days = [
+  "segunda-feira",
+  "terça-feira",
+  "quarta-feira",
+  "quinta-feira",
+  "sexta-feira",
+  "sábado",
+  "domingo",
+];
+
+const formatDate = (date) => {
+  const minutes =
+    String(date.getMinutes() + 1).length === 1
+      ? `0${date.getMinutes() + 1}`
+      : `${date.getMinutes() + 1}`;
+  const hours =
+    String(date.getHours() + 1).length === 1
+      ? `0${date.getHours() + 1}`
+      : `${date.getHours() + 1}`;
+
+  const year = date.getFullYear();
+
+  return `${hours}:${minutes} - ${days[date.getDay()]}, ${date.getDate()} de ${
+    months[date.getMonth()]
+  } de ${year}`;
+};
+
+console.log(formatDate(new Date()));
 /*
   03
 
@@ -36,7 +97,8 @@ const user = { id: 42, isVerified: true }
 
 const robotA = { name: 'Bender' }
 const robotB = { name: 'HAL 9000' }
-
+const {name:nameA} = robotA
+console.log(nameA)
 /*
   05
 

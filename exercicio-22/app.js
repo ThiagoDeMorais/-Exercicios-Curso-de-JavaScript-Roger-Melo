@@ -7,6 +7,9 @@
 */
 
 const names = ['Caio', 'André', 'Dário']
+const ordenedNames = names.map(item => item)
+console.log(ordenedNames.sort())
+
 
 /*
   02
@@ -16,12 +19,34 @@ const names = ['Caio', 'André', 'Dário']
   - Exiba o array ordenado no console.
 */
 
-const characters = [
-  { id: 03, name: 'Simba' },
-  { id: 02, name: 'Nala' },
-  { id: 01, name: 'Scar' },
-  { id: 04, name: 'Mufasa' }
-]
+// const characters = [
+//   { id: 03, name: 'Simba' },
+//   { id: 02, name: 'Nala' },
+//   { id: 01, name: 'Scar' },
+//   { id: 04, name: 'Mufasa' }
+// ]
+
+const characters = [03, 02, 01, 04]
+
+const ordenedCharacters = characters.map(item => item)
+
+for(let i= 0; i< ordenedCharacters.length; i++){
+  
+  for(let j = 0; j< ordenedCharacters.length; j++){
+    const firstElementIsBigger = ordenedCharacters[i] < ordenedCharacters[j]
+    const auxiliarConst = ordenedCharacters[i]
+
+    if(firstElementIsBigger){
+      ordenedCharacters[i] =  ordenedCharacters[j]
+      ordenedCharacters[j] = auxiliarConst
+    }
+    console.log(ordenedCharacters)
+
+  }
+}
+
+console.log(ordenedCharacters)
+
 
 /*
   03
@@ -32,6 +57,10 @@ const characters = [
 */
 
 const numbers = [41, 15, 63, 349, 25, 22, 143, 64, 59, 291]
+const ordenedNumbers = numbers.map(item => item)
+
+ordenedNumbers.sort((item2, item1) => item2 - item1)
+console.log('Números ordenados:' + ordenedNumbers)
 
 /*
   04
@@ -41,6 +70,8 @@ const numbers = [41, 15, 63, 349, 25, 22, 143, 64, 59, 291]
 
 const randomNumbers = [10, 5, 0, 40, 60, 10, 20, 70]
 
+const biggerThan50 = randomNumbers.find(number => number > 50)
+console.log(biggerThan50)
 /*
   05
 
@@ -50,7 +81,10 @@ const randomNumbers = [10, 5, 0, 40, 60, 10, 20, 70]
 */
 
 const people = ['Cauã', 'Alfredo', 'Bruno']
+const peopleCopy = people.map(item => item)
+peopleCopy.sort().reverse()
 
+console.log(people, peopleCopy)
 /*
   06
   
@@ -60,6 +94,22 @@ const people = ['Cauã', 'Alfredo', 'Bruno']
 */
 
 const ingredients = ['vinho', 'tomate', 'cebola', 'cogumelo']
+const genderDefine = (word) => {
+  if(word[word.length -1] === 'a'){
+    return 'a'
+  }
+  return 'o'
+}
+
+const srt = ingredients.reduce((accumulator, word, index, array) => {
+  console.log(array.length -1, index)
+  if(array.length -1 !== index){
+    return `${accumulator}${word} cozid${genderDefine(word)}, `
+  }
+  return `${accumulator}${word} cozid${genderDefine(word)}`
+}, '')
+
+console.log(srt)
 
 /*
   07
@@ -81,6 +131,14 @@ const topBrazilmovies = [
   { title: 'Dona Flor e Seus Dois Maridos', peopleAmount: 10735524, distributedBy: 'Embrafilme' }
 ]
 
+const topBrazilDisneyMovies = topBrazilmovies.filter(movie => movie.distributedBy === 'Disney')
+
+const peopleAmountDisney = topBrazilDisneyMovies.reduce((accumulator, movie) => {
+    return accumulator + movie.peopleAmount
+},0)
+
+console.log(peopleAmountDisney)
+
 /*
   08
   
@@ -101,6 +159,17 @@ const pets = [
   { name: 'Chico', age: 6, gender: 'Male', type: 'Dog' }
 ]
 
+const newAgePets = pets
+  .filter(pet => pet.type === 'Dog')
+  .map(dog => ({
+    name: dog.name,
+    age: dog.age * 2,
+    gender: dog.gender,
+    type: dog.type}))
+
+  console.log(newAgePets)
+
+
 /*
   09
   
@@ -108,6 +177,13 @@ const pets = [
     os nomes dos filmes na ul do index.html.
 */
 
+const ul = document.querySelector('.list-group')
+
+const movieNames = topBrazilmovies.reduce((accumulator, movie) =>{
+  return `${accumulator}<li>${movie.title}</li>`
+},'')
+
+ul.innerHTML = movieNames
 /*
   10
   
@@ -118,3 +194,6 @@ const pets = [
     - Se isso está acontecendo, proponha uma solução para que o 2º submit não 
       considere a pontuação do envio anterior.
 */
+
+
+

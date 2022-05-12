@@ -6,6 +6,7 @@
 */
 
 const myString = '    JS      '
+console.log(myString.trim())
 
 /*
   02
@@ -23,6 +24,13 @@ const people = [
   { firstName: 'Eric', lastName: 'Silva', score: 82 }
 ]
 
+const ordenedPeople = people.map(({ firstName, lastName, score }) => {
+  return ({ firstName, lastName, score })
+})
+                            .sort((item2 ,item1) => item2.score -item1.score)
+console.log(ordenedPeople)
+console.log('ordenedPeople')
+
 /*
   03
 
@@ -34,6 +42,7 @@ const people = [
 */
 
 const animals = ['cão', 'gato', 'boi', 'leão', 'gnu', 'alce', 'ema']
+const animalsWithThreeLetters = animals.filter(animal => animal.length === 3)
 
 /*
   04
@@ -42,7 +51,8 @@ const animals = ['cão', 'gato', 'boi', 'leão', 'gnu', 'alce', 'ema']
     nome de cada animal. Ex.: [6, 8, 2].
 */
 
-
+const numberOfLetters = animals.map(animal => animal.length)
+console.log(numberOfLetters)
 
 /*
   05
@@ -60,6 +70,10 @@ const friends = [
   { id: 5, name: 'Solange', nearMe: false }
 ]
 
+const nearFriends = friends
+                          .filter(friend => friend.nearMe === true)
+                          .map(friend => friend.name)
+console.log(nearFriends)                          
 
 
 /*
@@ -70,7 +84,12 @@ const friends = [
 */
 
 const numbers = [46, 86, 212, 29, 51, 9, 25, 42, 81]
+const sumOfOddNumbers = numbers.filter(number => number % 2 !== 0)
+                               .reduce((acumulator, number)=>{
+return acumulator + number
+}, 0)
 
+console.log(sumOfOddNumbers)
 /*
   07
 
@@ -91,3 +110,9 @@ const data = [{
   country: 'Indonesia',
   population: 263991379
 }]
+
+const populationSum = data.filter(({country})=> country !== 'China').reduce((acumulator, country)=>{
+  return acumulator + country.population
+}, 0)
+
+console.log(populationSum)
