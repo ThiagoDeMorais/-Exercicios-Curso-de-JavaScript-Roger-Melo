@@ -9,7 +9,9 @@ console.log('Linha 2')
 console.log('Linha 3')
 console.log('Linha 4')
 
-
+// setTimeout(() => {
+//   console.log("Callback executada")
+// }, 5000)
 
 console.log('Linha 5')
 console.log('Linha 6')
@@ -23,11 +25,12 @@ console.log('Linha 8')
     "logGreeting" ser exibida no console.
 */
 
+const x = (callback) => {callback('Hnagar')}
 function logGreeting (name) {
   console.log(`olá, ${name}`)
 }
 
-// x(logGreeting)
+x(logGreeting)
 
 /*
   03
@@ -36,7 +39,8 @@ function logGreeting (name) {
 */
 
 const numbers = [3, 4, 10, 20]
-const lesserThanFive = numbers.filter(num => num < 5)
+const getLessThanFive = num => num < 5
+const lesserThanFive = numbers.filter(getLessThanFive)
 
 console.log(lesserThanFive)
 
@@ -45,13 +49,11 @@ console.log(lesserThanFive)
 
   - Refatore o código abaixo.
 */
-
+const getTotalPrice = (amount, price) => amount + price
 const prices = [12, 19, 7, 209]
 let totalPrice = 0
 
-for (let i = 0; i < prices.length; i++) {
-  totalPrice += prices[i]
-}
+totalPrice = prices.reduce(getTotalPrice , 0)
 
 console.log(`Preço total: ${totalPrice}`)
 
@@ -63,6 +65,11 @@ console.log(`Preço total: ${totalPrice}`)
 */
 
 let car = { color: 'amarelo' }
+// car['color'] = 'azul'
+let secondCar = car
+secondCar['color'] = 'azul'
+console.log(car)
+
 
 /*
   06
@@ -73,6 +80,18 @@ let car = { color: 'amarelo' }
   - Se todos os argumentos forem passados, retorne a string 'A função foi 
     invocada com 3 argumentos'.
 */
+
+function func(firstValue, secondValue, ThirdValue){
+  const successMessage ='A função deve ser invocada com 3 argumentos'
+  const failureMessage = 'A função foi invocada com 3 argumentos'
+
+  const arrayofValues = [firstValue, secondValue, ThirdValue]
+  const isThereAnyUndefined = element => element === undefined
+  return arrayofValues.some(isThereAnyUndefined)?successMessage:failureMessage
+}
+
+console.log(func('a','undefined'))
+
 
 /*
   07
@@ -98,5 +117,32 @@ let car = { color: 'amarelo' }
 
 let booksBox = {
   spaces: 5,
-  booksIn: 0
+  booksIn: 0,
+  addBook(numberOfNewBooks){
+
+    if(this.booksIn === this.spaces){
+      console.log(`A caixa já está cheia`)
+      return
+    }
+
+    const availableSpaces = this.spaces - this.booksIn
+
+
+    if(numberOfNewBooks + this.booksIn <= this.spaces ){
+      this.booksIn += numberOfNewBooks
+      const bookPluralOrSingular = this.booksIn === 1? 'livro':'livros'
+      console.log(`Já há '${this.booksIn}' ${bookPluralOrSingular} na caixa`)
+      return
+    }
+
+    const fitPluralOrSingular = availableSpaces === 1? 'cabe':'cabem'
+    const bookPluralOrSingular = availableSpaces ===1? 'livro':'livros'
+    console.log(`Só ${fitPluralOrSingular} mais ${availableSpaces} ${bookPluralOrSingular}`)
+  }
 }
+booksBox.addBook(9)
+booksBox.addBook(2)
+booksBox.addBook(2)
+booksBox.addBook(1)
+booksBox.addBook(1)
+
