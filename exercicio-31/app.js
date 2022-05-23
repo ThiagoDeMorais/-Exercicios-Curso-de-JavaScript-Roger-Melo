@@ -8,6 +8,28 @@
     do GitHub.
 */
 
+// fetch('https://api.github.com/users/ThiagoDeMorais')
+// .then(data => {
+//   return data.json()
+// })
+// .then(data => console.log(data))
+// .catch('Erro ao obter os dados')
+
+const getData = async () => {
+  const response = await fetch('https://api.github.com/users/ThiagoDeMorais')
+  return await response.json()
+}
+
+const logData = async () => {
+  const data = await getData()
+  console.log(data)
+}
+
+logData()
+
+
+
+
 /*
   02
 
@@ -17,7 +39,9 @@
 */
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
+const expression = number => number%2 === 0 || number%3 === 0
+const numbersThatAreDivisibleByTwoOrThree = numbers.filter(expression)
+console.log(numbersThatAreDivisibleByTwoOrThree)
 /*
   03
 
@@ -32,6 +56,11 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     - Rafaela => "PRaPfaPePla".
 */
 
+const syllables = ['thi','a','go']
+const nameInPLanguage = syllables.reduce((acc, syllable) => {
+  return `${acc}P${syllable}`
+},'')
+console.log(nameInPLanguage)
 /*
   04
 
@@ -47,6 +76,12 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
   Dica: pesquise pelo método split.
 */
 
+const name = 'Thiago'
+const nameArray = name.split('')
+nameArray.forEach((element, index) => {
+  console.log(`- "${element}" é a ${index+1}ª letra do meu nome;`)
+});
+
 /*
   05
 
@@ -59,6 +94,14 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
   Dica: pesquise pelo método Object.keys().
 */
+
+const data = {
+  name:String,
+  lastName:String,
+  age:Number
+}
+
+console.log(Object.keys(data))
 
 /*
   06
@@ -74,6 +117,27 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 */
 
 const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
+
+
+// const getOccurrences = (array, number) => {
+//   let accumulator = 0
+//   array.forEach(element => {
+//     accumulator += (element === number? 1 : 0)
+//   })
+//   return accumulator
+// }
+
+// console.log(getOccurrences(scores,85))
+
+const getOccurrences = (array, number) => {
+  const occurrences = array.reduce((acc, item) => {
+    return acc + (item === number? 1 : 0 )
+  },0)
+  return occurrences
+}
+
+console.log(getOccurrences(scores,55))
+
 
 /*
   07
@@ -98,3 +162,18 @@ const scores = [100, 90, 85, 100, 60, 85, 100, 90, 55, 75, 60]
   Dica: lembre-se que o método filter inclui o item em questão no novo array 
   que está sendo gerado **apenas** se a função retorna um valor truthy.
 */
+
+const cloneFilter = (array, callback) => {
+  const newArray = []
+  array.forEach((item, index, array) => {
+    const satisfiesCondition = callback(item, index, array)
+    if(satisfiesCondition){
+      newArray.push(item)
+    }
+  })
+  return newArray
+}
+
+console.log(cloneFilter([1, 2, 3, 2, 1, 5], (item, index, array) =>
+index === array.indexOf(item)))
+

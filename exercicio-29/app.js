@@ -12,6 +12,43 @@
     - Os requests devem ser sequenciais. Ou seja, um request só deve ser 
       executado quando o request anterior for finalizado.
 */
+const bulbasaur = "bulbasaur";
+const charmander = "charmander";
+const squirtle = "squirtle";
+
+const getPokemon = (pokemon, callback) => {
+  const request = new XMLHttpRequest();
+
+  request.addEventListener("readystatechange", () => {
+    const isRequestOk = request.readyState === 4 && request.status === 200;
+    const isNotRequestOk = request.readyState === 4;
+
+    if (isRequestOk) {
+      const data = JSON.parse(request.responseText);
+      const pokemonName = data.name;
+
+      callback(null, `Pokémon obtido ${pokemonName}`);
+
+      return;
+    }
+
+    if (isNotRequestOk) {
+      callback("Não foi possível obter o Pokémon", null);
+    }
+  });
+
+  const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
+  request.open("GET", url);
+  request.send();
+};
+
+const showMessage = (error, data) => {
+  return error ? console.log(error) : console.log(data);
+};
+
+getPokemon(bulbasaur, showMessage);
+getPokemon(charmander, showMessage);
+getPokemon(squirtle, showMessage);
 
 /*
   02
@@ -32,6 +69,16 @@
     2) Pesquisar no MDN.
 */
 
+const cloneMap = (array, callback) => {
+  const newArray = [];
+  array.forEach((element) => {
+    newArray.push(callback(element));
+  });
+  return newArray;
+};
+
+console.log(cloneMap([1, 2, 4], (number) => number * 7));
+
 /*
   03
 
@@ -40,11 +87,13 @@
 */
 
 const person = {
-  name: 'Roger',
-  getName: () => this.name
-}
+  name: "Roger",
+  getName() {
+    return this.name;
+  },
+};
 
-// console.log(person.getName())
+console.log(person.getName());
 
 /*
   04
@@ -54,9 +103,12 @@ const person = {
   - Faça as duas const x coexistirem, sem modificar o nome de qualquer uma 
     delas.
 */
-
-const x = 'x'
-// const x = 'y'
+if (true) {
+  const x = "x";
+  console.log(x);
+}
+const x = "y";
+console.log(x);
 
 /*
   05
@@ -65,14 +117,11 @@ const x = 'x'
     conseguir.
 */
 
-const getFullName = (user) => {
-  const firstName = user.firstName
-  const lastName = user.lastName
+const getFullName = ({ firstName, lastName }) => {
+  return `${firstName} ${lastName}`;
+};
 
-  return `${firstName} ${lastName}`
-}
-
-console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
+console.log(getFullName({ firstName: "Afonso", lastName: "Solano" }));
 
 /*
   06
@@ -88,6 +137,17 @@ console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
   - Exiba o hexadecimal de 8 cores diferentes usando a função criada acima.
 */
 
+function convertToHex(color) {
+  const colors = {
+     red: '#FF0000' ,
+     blue: '#0000FF' ,
+     green: '#008000' ,
+  };
+
+  return colors[color]||`Não temos o equivalente hexadecimal para COR`;
+}
+
+console.log(convertToHex('red'));
 
 /*
   07
@@ -105,10 +165,21 @@ console.log(getFullName({ firstName: 'Afonso', lastName: 'Solano' }))
 */
 
 const people = [
-  { id: 5 , name: 'Angelica', age: 18, federativeUnit: 'Pernambuco' },
-  { id: 81, name: 'Thales', age: 19, federativeUnit: 'São Paulo' },
-  { id: 47, name: 'Ana Carolina', age: 18, federativeUnit: 'Alagoas' },
-  { id: 87, name: 'Felipe', age: 18, federativeUnit: 'Minas Gerais' },
-  { id: 9 , name: 'Gabriel', age: 20, federativeUnit: 'São Paulo' },
-  { id: 73, name: 'Aline', age: 19, federativeUnit: 'Brasília' }
-]
+  { id: 5, name: "Angelica", age: 18, federativeUnit: "Pernambuco" },
+  { id: 81, name: "Thales", age: 19, federativeUnit: "São Paulo" },
+  { id: 47, name: "Ana Carolina", age: 18, federativeUnit: "Alagoas" },
+  { id: 87, name: "Felipe", age: 18, federativeUnit: "Minas Gerais" },
+  { id: 9, name: "Gabriel", age: 20, federativeUnit: "São Paulo" },
+  { id: 73, name: "Aline", age: 19, federativeUnit: "Brasília" },
+];
+
+const createorincrementFrequency = (acc, {age}) => {
+  acc[age] = acc[age] + 1 || 1
+  return acc
+}
+
+const frequenceAges = people.reduce(createorincrementFrequency, {});
+
+console.log(frequenceAges)
+
+

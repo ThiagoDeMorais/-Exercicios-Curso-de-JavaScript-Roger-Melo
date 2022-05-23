@@ -16,6 +16,23 @@
   - Teste também a verificação do item acima.
 */
 
+const request = new XMLHttpRequest();
+
+request.addEventListener("readystatechange", () => {
+  const readyState = request.readyState === 4;
+  const status = request.status === 200;
+  if (readyState) {
+    if (status) {
+      console.log(request.responseText);
+      return
+    }
+    console.log("Não foi possível obter os dados do pokémon")
+  }
+});
+
+request.open("GET", "https://pokeapi.co/api/v2/pokemon/pikachu");
+request.send();
+
 /*
   02
 
@@ -31,6 +48,13 @@
     - Quantos metros você caminhou (number iniciado em 0).
 */
 
+const gorila = {
+  name:'Tonyolo',
+  walking: false,
+  powerPunch:0,
+  metersTraveled: 0
+}
+
 /*
   03
 
@@ -39,6 +63,16 @@
   - A cada vez que o método é invocado, 1 deve ser somado à idade atual;
   - Após criar o método, adicione 5 anos à idade do objeto.
 */
+gorila.addPowerPunch = () => {
+  gorila.powerPunch++
+}
+
+
+gorila.addPowerPunch()
+console.log(gorila)
+
+
+
 
 /*
   04
@@ -50,6 +84,20 @@
   - Após criar o método, faça a pessoa caminhar alguns metros, invocando o 
     método 4x, com diferentes metragens passadas por parâmetro.
 */
+
+gorila.metersWalked = metters => {
+  gorila.metersTraveled += metters
+  gorila.walking = true
+}
+
+gorila.metersWalked(4)
+gorila.metersWalked(2)
+gorila.metersWalked(1)
+gorila.metersWalked(2)
+console.log(gorila)
+
+
+
 
 /*
   05
@@ -79,6 +127,22 @@
     valor truthy;
     - Faça isso até que 7 valores truthy sejam passados.
 */
+
+const isTruth = value => {
+  return Boolean(value)
+}
+
+console.log(isTruth(0))
+console.log(isTruth(undefined))
+console.log(isTruth(NaN))
+console.log(isTruth(null))
+console.log(isTruth(''))
+console.log(isTruth(false))
+console.log(isTruth(7))
+
+
+
+
 
 /*
   07

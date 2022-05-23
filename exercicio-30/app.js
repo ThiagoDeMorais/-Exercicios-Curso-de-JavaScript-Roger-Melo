@@ -7,6 +7,33 @@
   - Se o request não estiver ok, exiba no console "Não foi possível obter os 
     dados dos usuários."
 */
+// const url = "https://jsonplaceholder.typicode.com/users";
+
+// const getUsers = url => {
+//   return new Promise((resolved, rejected) => {
+//     const request = new XMLHttpRequest();
+//     request.addEventListener("readystatechange", () => {
+//       const isRequestOk = request.readyState === 4 && request.status === 200;
+//       const isRequestNotOk = request.readyState === 4;
+
+//       if (isRequestOk) {
+//         const data = request.responseText;
+//         resolved(data);
+//       }
+
+//       if (isRequestNotOk) {
+//         rejected("Não foi possível receber os dados da API");
+//       }
+//     });
+
+//     request.open("GET", url);
+//     request.send();
+//   });
+// };
+
+// getUsers(url)
+//   .then(value => console.log(value))
+//   .catch(error => console.log(error))
 
 /*
   02
@@ -22,6 +49,22 @@
   - Se o operador não for válido, retorne a mensagem "Operação inválida."
 */
 
+const calculator = (operator) => (number1, number2) => {
+  const operations = {
+    "+": `${number1} ${operator} ${number2} = ${number1 + number2}`,
+    "-": `${number1} ${operator} ${number2} = ${number1 - number2}`,
+    "*": `${number1} ${operator} ${number2} = ${number1 * number2}`,
+    "/": `${number1} ${operator} ${number2} = ${number1 / number2}`,
+    "%": `${number1} ${operator} ${number2} = ${number1 % number2}`,
+  };
+  return operations[operator] || 'Operação inválida';
+};
+
+const sum = calculator("qwe");
+console.log(sum);
+console.log(sum(1, 8));
+const sub = calculator("-");
+console.log(sub(9, 7));
 /*
   03
 
@@ -35,6 +78,27 @@
   - Crie um novo array chamado `newSul`, que recebe somente os estados do sul,
     pegando do array `brasil`. Não remova esses itens de `brasil`.
 */
+
+const south = ["Parana", "Santa Catarina", "Rio Grande do Sul"];
+const southeast = [
+  "São Paulo",
+  "Rio de Janeiro",
+  "Minais Gerais",
+  "Espirito Santo",
+];
+const brazil = south.concat(southeast);
+console.log(brazil);
+brazil.unshift("Amazonas", "Tocantins", "Para");
+console.log(brazil);
+brazil.shift();
+console.log(brazil);
+const isItFromTheouth = (state) =>
+  state === "Parana" ||
+  state === "Santa Catarina" ||
+  state === "Rio Grande do Sul";
+const newSouth = brazil.map((state) => state).filter(isItFromTheouth);
+console.log(newSouth);
+console.log(brazil);
 
 /*
   04
@@ -55,6 +119,23 @@
     every.
 */
 
+const northEast = [ 'Alagoas', 'Bahia', 'Ceará', 'Maranhão', 'Paraíba', 'Pernambuco', 'Piauí', 'Rio Grande do Norte', 'Sergipe'] 
+brazil.splice(5)
+northEast.forEach(state => {
+  brazil.push(state)
+})
+console.log(brazil)
+const newBrazil = brazil.map((state, index) => {
+  return {id:index, stateName: state}
+})
+const statesHaveMoreThanSevenLetters = newBrazil.every(state => state.stateName.length > 7)
+console.log(newBrazil)
+if(statesHaveMoreThanSevenLetters){
+  console.log('Sim, todos os estados tem mais de 7 letras.')
+}else{
+  console.log('Nem todos os estados tem mais de 7 letras.')
+}
+
 /*
   05
 
@@ -68,3 +149,20 @@
   - Filtre o array criado acima, retornando somente os estados que tiverem ID 
     par. Atribua este novo array à uma constante.
 */
+
+const cearaIsIncluded = brazil.includes('Ceará')
+
+if(cearaIsIncluded){
+  console.log('Ceará está incluído.')
+}else{
+  console.log('Ceará não foi incluído =/')
+}
+
+const newNewBrazil = newBrazil.map((state) =>{
+  return {id:state.id += 1, stateName:`${state.stateName} pertence ao Brasil.`}
+})
+
+console.log(newNewBrazil)
+const stateIndexIsEven = state => state.id % 2 === 0
+const newNewNewBrazil = newNewBrazil.filter(stateIndexIsEven)
+console.log(newNewNewBrazil)
