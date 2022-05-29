@@ -5,6 +5,30 @@
     e retorna o valor da key parseado para objeto javascript.
 */
 
+const setItens = (key, value) => {
+  const isString = typeof value === 'string';
+  isString
+    ? localStorage.setItem(key, value)
+    : localStorage.setItem(key, JSON.stringify(value));
+};
+
+const getItens = (key) => {
+  return JSON.parse(localStorage.getItem(key));
+};
+
+const students = [
+  { name: "James", pontuation: 90 },
+  { name: "Josh", pontuation: 90 },
+  { name: "Robby", pontuation: 80 },
+];
+
+
+students.forEach((student, index) => {
+  setItens(index, student);
+});
+
+console.log(getItens(2))
+
 /*
   02
 
@@ -18,11 +42,11 @@
   Dica: pesquise por valueAsNumber.
 */
 
-const input = document.querySelector('[data-js="input"]')
+const input = document.querySelector('[data-js="input"]');
 
-input.addEventListener('input', event => {
-  console.log(event.target.value)
-})
+input.addEventListener("input", (event) => {
+  console.log(event);
+});
 
 /*
   03
@@ -39,28 +63,26 @@ input.addEventListener('input', event => {
     retornar 60 e a segunda invocação, 10.
 */
 
-function add100 (num) {
-  return num + 100
-}
+const combineOperations = (initialValue, arrayOfFunctions) => 
+   arrayOfFunctions.reduce((amount, func) =>  func(amount) ,initialValue)
 
-function divByFive (num) {
-  return num / 5
-}
+const add100 = num => num + 100;
 
-function multiplyByThree (num) {
-  return num * 3
-}
 
-function multiplyFive (num) {
-  return num * 5
-}
+const divByFive = num => num / 5;
 
-function addTen (num) {
-  return num + 10
-}
 
-// console.log(combineOperations(0, [add100, divByFive, multiplyByThree]))
-// console.log(combineOperations(0, [divByFive, multiplyFive, addTen]))
+const multiplyByThree = num => num * 3;
+
+
+const multiplyFive = num => num * 5;
+
+
+const addTen = num => num + 10;
+
+
+console.log(combineOperations(0, [add100, divByFive, multiplyByThree]))
+console.log(combineOperations(0, [divByFive, multiplyFive, addTen]))
 
 /*
   04
@@ -72,38 +94,38 @@ function addTen (num) {
 const albums = [
   {
     id: 537,
-    title: 'The Dark Side of the Moon',
-    artist: 'Pink Floyd',
-    price: 59.90,
-    genre: 'Progressive Rock'
+    title: "The Dark Side of the Moon",
+    artist: "Pink Floyd",
+    price: 59.9,
+    genre: "Progressive Rock",
   },
   {
     id: 975,
-    title: 'Houses of the Holy',
-    artist: 'Led Zeppelin',
-    price: 81.00,
-    genre: 'Rock'
+    title: "Houses of the Holy",
+    artist: "Led Zeppelin",
+    price: 81.0,
+    genre: "Rock",
   },
   {
     id: 359,
-    title: 'Heaven and Hell',
-    artist: 'Black Sabbath',
-    price: 49.90,
-    genre: 'Heavy metal'
-  }
-]
+    title: "Heaven and Hell",
+    artist: "Black Sabbath",
+    price: 49.9,
+    genre: "Heavy metal",
+  },
+];
 
 const searchAlbum = {
   id: 975,
-  title: 'Houses of the Holy',
-  artist: 'Led Zeppelin',
-  price: 81.00,
-  genre: 'Rock'
-}
+  title: "Houses of the Holy",
+  artist: "Led Zeppelin",
+  price: 81.0,
+  genre: "Rock",
+};
 
-if (albums.includes(searchAlbum)) {
-  console.log(`${JSON.stringify(searchAlbum)} existe no array albums.`)
-}
+// if (albums.includes(searchAlbum)) {
+//   console.log(`${JSON.stringify(searchAlbum)} existe no array albums.`);
+// }
 
 /*
   05
@@ -112,15 +134,23 @@ if (albums.includes(searchAlbum)) {
 */
 
 const obj = {
-  prop1: 'a',
-  prop2: 'b',
+  prop1: "a",
+  prop2: "b",
   prop3: null,
   prop4: true,
   prop5: false,
   prop6: [9, { x: 1, y: 2 }],
   prop7: 7,
-  prop8: { a: 'x', b: 'y' },
-}
+  prop8: { a: "x", b: "y" },
+};
+
+localStorage.setItem('1',JSON.stringify(obj))
+const objAsString = JSON.stringify(obj, null, 1)
+const objClone = JSON.parse(objAsString)
+obj.prop1 = 'z'
+
+console.log(obj, objClone)
+
 
 /*
   06
@@ -132,6 +162,23 @@ const obj = {
 
   Dica: pesquise por Object.entries.
 */
+
+// const createHTMLElement = (element, obj) =>{
+//   const elementHTML = document.createElement(element)
+//   for(const [key, value] of Object.entries(obj)){
+//     elementHTML.setAttribute(key, value)
+//   }
+//   return elementHTML
+// }
+
+// const obj = {
+//   'name':'element',
+//   'surname':'onlyElement',
+//   'suname':'onlyElement'
+// }
+
+// console.log(createHTMLElement('p',obj))
+
 
 /*
   07

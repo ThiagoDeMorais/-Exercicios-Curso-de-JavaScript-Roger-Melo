@@ -12,22 +12,31 @@
     versão deve fazer o mesmo que a função anterior faz, mas de forma diferente.
 */
 
+const invertString = (string) => {
+  let newString = "";
+  for (let i = string.length-1; i >= 0; i--) {
+    newString += string[i];
+  }
+  return newString;
+};
+
+console.log(invertString("abc"))
+
+const invertStringClone = string => {
+  return string.split('').reverse().join('')
+}
+
+console.log(invertStringClone('abc'))
 /*
   02
   
   - Descubra o que o código abaixo está fazendo e refatore-o.
 */
 
-const numbers = [5, 20, 7, 32, 47, 15, 83, 91, 27, 33]
-let foundNumber = false
+const numbers = [5, 20, 7, 32, 47, 15, 83, 91, 27, 33];
+let foundNumber = numbers.includes(15)
 
-numbers.forEach(number => {
-  if (number === 15) {
-    foundNumber = true
-  }
-})
-
-console.log(foundNumber)
+console.log(foundNumber);
 
 /*
   03

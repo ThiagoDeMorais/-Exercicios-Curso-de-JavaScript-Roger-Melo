@@ -5,7 +5,7 @@
   - Solucione esse problema sem declarar uma constante "book".
 */
 
-// console.log(book)
+console.log(book);
 
 /*
   02
@@ -17,6 +17,10 @@
   - Implemente a função da forma mais concisa que você conseguir.
 */
 
+const crazyFunction = ([first, , third]) => [third, first];
+
+console.log(crazyFunction([91, 3, 2]));
+
 /*
   03
 
@@ -25,10 +29,14 @@
 */
 
 const topics = [
-  { id: 1, name: 'Artes & cultura'},
-  { id: 2, name: 'Negócios & finanças'},
-  { id: 3, name: 'Carreiras'}
-]
+  { id: 1, name: "Artes & cultura" },
+  { id: 2, name: "Negócios & finanças" },
+  { id: 3, name: "Carreiras" },
+];
+
+
+const [, , { name }] = topics;
+console.log(name);
 
 /*
   04
@@ -38,7 +46,9 @@ const topics = [
     'red', 'green' e 'blue'.
 */
 
-const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
+const colors = ["#FF00FF", ["#FF0D0D", "#0AFA00", "#011EFA"], "#7BF0FF"];
+const [,[red, green, blue],] = colors
+console.log(red, green, blue)
 
 /*
   05
@@ -54,8 +64,14 @@ const colors = ['#FF00FF', ['#FF0D0D', '#0AFA00', '#011EFA'], '#7BF0FF']
     - Faça a função retornar "Olá, meu nome é [NOME]!".
 */
 
-// console.log(greet({ name: 'Roger' }, 'name'))
-// console.log(greet({}, 'personName'))
+const greet = (obj, dynamicName ) => {
+  const {[dynamicName]:name = 'desconhecido'} = obj
+  console.log(dynamicName)
+  console.log(`Olá, meu nome é ${name} !`)
+}
+
+console.log(greet({ name: 'Roger' }, 'name'))
+console.log(greet({}, 'personName'))
 
 /*
   06

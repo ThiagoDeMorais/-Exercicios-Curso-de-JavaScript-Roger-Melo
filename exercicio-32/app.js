@@ -73,7 +73,7 @@ const insertGIFSInToDOM = (img) => {
   GIFSContainer.insertAdjacentElement("afterbegin", img);
 };
 
-const getGifs = async (GIFUrl) => {
+const getGifs = async ( GIFUrl) => {
   try {
     const response = await fetch(GIFUrl);
     if (!response.ok) {
