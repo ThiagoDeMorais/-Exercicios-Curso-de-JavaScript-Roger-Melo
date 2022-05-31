@@ -8,11 +8,12 @@
   - Não use a sintaxe item[index].
 */
 
-const numbers = [50, 100, 50]
+const numbers = [50, 100, 50];
 
-const sum = (x, y, z) => x + y + z
+const sum = (x, y, z) => x + y + z;
+//const sum = array => array.reduce((acc,number)=>acc+number,0)
 
-console.log(sum(numbers))
+console.log(sum(...numbers));
 
 /*
   02
@@ -23,6 +24,9 @@ console.log(sum(numbers))
     apenas a primeira letra maiúscula.
 */
 
+const name = "thiago";
+console.log([name[0].toUpperCase(), ...name.slice(1)].join(""));
+
 /*
   03
 
@@ -32,14 +36,15 @@ console.log(sum(numbers))
   - Não utilize as estruturas condicionais if ou switch.
 */
 
-const randomNumber = Math.round(Math.random() * 100)
-
+const randomNumber = Math.round(Math.random() * 100);
+console.log(Math.max(randomNumber));
 const obj = {
   a: 1,
-  b: 2
-}
+  b: 2,
+  ...(randomNumber > 50 ? { c: 3 } : { d: 4 }),
+};
 
-console.log(obj)
+console.log(obj);
 
 /*
   04
@@ -47,24 +52,24 @@ console.log(obj)
   - Descubra o que o código abaixo está fazendo e refatore-o para que o objeto 
     criado permaneça intacto.
 */
+const h = (w) => {
+  w.d = 3;
+  console.log(w);
+};
 
-const h = w => {
-  w.d = 3
-}
+const q = (f) => {
+  h(f);
+};
 
-const q = f => {
-  h(f)
-}
+const i = (b) => {
+  q(b);
+};
 
-const i = b => {
-  q(b)
-}
+const v = { k: "t" };
 
-const v = { k: 't' }
-
-i(v)
-console.log(v)
-
+i({ ...v });
+console.log(v);
+console.log("---------------------------------");
 /*
   05
 
@@ -83,18 +88,26 @@ console.log(v)
 
 const timestamps = [
   {
-    date: '3242348-9842340234',
-    value: 6
+    date: "3242348-9842340234",
+    value: 6,
   },
   {
-    date: '99e89-499958',
-    value: 31
+    date: "99e89-499958",
+    value: 31,
   },
   {
-    date: '8596646656666r488',
-    value: 17
-  }
-]
+    date: "8596646656666r488",
+    value: 17,
+  },
+];
+
+const crazyObject = timestamps.reduce((acc, { date, value }) => {
+  acc[date] = value;
+  return acc;
+}, {});
+console.log(crazyObject);
+
+console.log("---------------------------------");
 
 /*
   06
@@ -116,8 +129,23 @@ const timestamps = [
   Dica 2: o método forEach nunca retorna um valor.
 */
 
-let accumulator = 0
-const oddNumbers = [51, 97, 65, 23]
+let accumulator = 0;
+const oddNumbers = [51, 97, 65, 23];
+
+// const forEachClone = (array, func) => {
+//   for(let i = 0; i< array.length; i++){
+//     func(array[i])
+//   }
+// }
+
+const forEachClone = (array, func) => {
+  for (let i = 0; i < array.length; i++) {
+    func(array[i]);
+  }
+};
+
+forEachClone(oddNumbers, (item) => (accumulator += item));
+console.log(accumulator);
 
 /*
   07
@@ -147,3 +175,34 @@ const oddNumbers = [51, 97, 65, 23]
     3 No passo 3.4, se o slide exibido atualmente não corresponder ao index do 
       1º slide, o slide anterior deve ser exibido.
 */
+
+const buttonPrev = document.querySelector('[data-js="carousel__button--prev"]');
+const buttonNext = document.querySelector('[data-js="carousel__button--next"]');
+const slides = document.querySelectorAll('[data-js="carousel__item"]');
+let slideIndex = 0;
+
+const hiddenSlides = () => {
+  slides.forEach((slide) => {
+    slide.classList.remove("carousel__item--visible");
+    slide.classList.add("carousel__item--hidden");
+  });
+}
+
+buttonNext.addEventListener("click", () => {
+  hiddenSlides()
+  slideIndex++;
+  if (slideIndex > 2) {
+    slideIndex = 0;
+  }
+  slides[slideIndex].classList.add("carousel__item--visible");
+});
+
+buttonPrev.addEventListener('click', () => {
+  hiddenSlides()
+
+  slideIndex--;
+  if (slideIndex < 0) {
+    slideIndex = 2;
+  }
+  slides[slideIndex].classList.add("carousel__item--visible");
+})
